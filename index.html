@@ -7,28 +7,119 @@
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
-            background: #211633; 
+            background: #211633; /* TWOJE NOWE TŁO */
             color: #e0e0e0; 
             text-align: center; 
             padding: 20px; 
             margin: 0;
         }
-        .header-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 20px; margin-bottom: 5px; }
-        .profile-pic { width: 70px; height: 70px; border-radius: 50%; border: 2px solid #a970ff; object-fit: cover; box-shadow: 0 0 15px rgba(169, 112, 255, 0.4); }
+
+        /* Nagłówek: Zdjęcie + Tytuł */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #a970ff;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(169, 112, 255, 0.4);
+        }
+
         h1 { color: #a970ff; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .subtitle { color: #b0a4c4; margin-bottom: 15px; font-size: 0.9em; }
-        .gif-wrapper { margin-bottom: 25px; }
-        .dance-gif { width: 120px; height: auto; border-radius: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; max-width: 800px; margin: 0 auto; }
-        .card { background: #2d2042; border: 1px solid #3d2d56; border-radius: 10px; padding: 15px; transition: 0.2s; display: flex; flex-direction: column; align-items: center; }
-        .card:hover { border-color: #a970ff; background: #36274e; transform: translateY(-3px); }
-        .card img { width: 50px; height: 50px; border-radius: 6px; margin-bottom: 10px; background: #1a1a1a; cursor: pointer; transition: transform 0.1s; }
+
+        /* Kontener na GIF-a */
+        .gif-wrapper {
+            margin-bottom: 25px;
+        }
+
+        .dance-gif {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        /* Siatka dźwięków */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+            gap: 15px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        
+        .card { 
+            background: #2d2042; /* Lekko jaśniejszy fiolet dla kafelków, żeby były widoczne */
+            border: 1px solid #3d2d56; 
+            border-radius: 10px; 
+            padding: 15px; 
+            transition: 0.2s; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .card:hover { 
+            border-color: #a970ff; 
+            background: #36274e; 
+            transform: translateY(-3px);
+        }
+        
+        .card img { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 6px; 
+            margin-bottom: 10px; 
+            background: #1a1a1a;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
         .card img:active { transform: scale(0.9); }
+        
         .name { display: block; font-weight: bold; font-size: 1em; margin-bottom: 5px; color: #fff; }
-        .cmd { font-family: monospace; color: #a970ff; background: #160d24; padding: 5px 8px; border-radius: 4px; font-size: 0.85em; cursor: copy; border: 1px dashed #a970ff; transition: 0.2s; }
+        
+        .cmd { 
+            font-family: monospace; 
+            color: #a970ff; 
+            background: #160d24; 
+            padding: 5px 8px; 
+            border-radius: 4px; 
+            font-size: 0.85em; 
+            cursor: copy; 
+            border: 1px dashed #a970ff;
+            transition: 0.2s;
+        }
         .cmd:hover { background: #a970ff; color: #160d24; }
-        #toast { visibility: hidden; min-width: 200px; background-color: #a970ff; color: #160d24; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 100; left: 50%; bottom: 30px; transform: translateX(-50%); font-weight: bold; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
-        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2s; }
+
+        /* Styl notyfikacji */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #a970ff;
+            color: #160d24;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2s;
+        }
+
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
@@ -60,4 +151,48 @@
         </div>
 
         <div class="card">
-            <img src="img/joker.jpg" onclick
+            <img src="img/joker.jpg" onclick="play('joker')" alt="joker">
+            <span class="name">Joker</span>
+            <span class="cmd" onclick="copyCmd('!graj joker')">!graj joker</span>
+        </div>
+
+        <div class="card">
+            <img src="img/kurwa.jpg" onclick="play('kurwa')" alt="kurwa">
+            <span class="name">Kurwa</span>
+            <span class="cmd" onclick="copyCmd('!graj kurwa')">!graj kurwa</span>
+        </div>
+
+        <div class="card">
+            <img src="img/morda.jpg" onclick="play('morda')" alt="morda">
+            <span class="name">Morda</span>
+            <span class="cmd" onclick="copyCmd('!graj morda')">!graj morda</span>
+        </div>
+
+        <div class="card">
+            <img src="img/skrzypce.jpg" onclick="play('skrzypce')" alt="skrzypce">
+            <span class="name">Skrzypce</span>
+            <span class="cmd" onclick="copyCmd('!graj skrzypce')">!graj skrzypce</span>
+        </div>
+    </div>
+
+    <div id="toast">Skopiowano komendę!</div>
+
+    <script>
+        function play(file) {
+            let audio = new Audio(file + '.mp3');
+            audio.volume = 0.4;
+            audio.play();
+        }
+
+        function copyCmd(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                let toast = document.getElementById("toast");
+                toast.innerText = "Skopiowano: " + text;
+                toast.className = "show";
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+            });
+        }
+    </script>
+
+</body>
+</html>
