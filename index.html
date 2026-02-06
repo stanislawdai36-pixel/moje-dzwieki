@@ -1,99 +1,45 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joker Soundboard</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f0f; color: #e0e0e0; text-align: center; padding: 40px; }
-        h1 { color: #a970ff; margin-bottom: 10px; }
-        .subtitle { color: #888; margin-bottom: 30px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
-        .card { 
-            background: #1a1a1a; 
-            border: 2px solid #333; 
-            border-radius: 12px; 
-            padding: 20px; 
-            transition: 0.3s; 
-            cursor: pointer;
-            display: flex; /* Flexbox dla wyśrodkowania zawartości */
-            flex-direction: column; /* Elementy w kolumnie */
-            align-items: center; /* Wyśrodkowanie w poziomie */
-            justify-content: center; /* Wyśrodkowanie w pionie */
-            text-decoration: none; /* Usuń podkreślenia dla linków, jeśli użyjesz <a> */
-            color: inherit; /* Dziedzicz kolor tekstu */
-        }
-        .card:hover { border-color: #a970ff; background: #252525; transform: translateY(-5px); }
-        .card img { 
-            width: 80px; /* Rozmiar obrazka */
-            height: 80px; 
-            object-fit: cover; /* Dopasowanie obrazka */
-            border-radius: 50%; /* Okrągłe zdjęcia */
-            margin-bottom: 15px; 
-            border: 2px solid #555; /* Ramka wokół zdjęcia */
-        }
-        .name { display: block; font-weight: bold; font-size: 1.2em; margin-bottom: 5px; color: #fff; }
-        .cmd { font-family: monospace; color: #a970ff; background: #000; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; }
-        .play-hint { display: block; margin-top: 10px; font-size: 0.8em; color: #555; }
-    </style>
-</head>
-<body>
-
-    <h1>🃏 Joker Soundboard</h1>
-    <p class="subtitle">Kliknij kafelka, aby przesłuchać. Użyj na czacie: <strong>!joker nazwa</strong></p>
-
-    <div class="grid">
+<div class="grid">
+        
         <div class="card" onclick="play('echo')">
-            <img src="img/echo.png" alt="Obrazek dla Echo Sound">
+            <img src="img/echo.jpg" alt="echo">
             <span class="name">Echo</span>
-            <span class="cmd">!joker echo</span>
+            <span class="cmd">!graj echo</span>
             <span class="play-hint">Kliknij, by odtworzyć</span>
         </div>
 
         <div class="card" onclick="play('gtfo')">
-            <img src="img/gtfo.png" alt="Obrazek dla GTFO Sound">
+            <img src="img/gtfo.jpg" alt="gtfo">
             <span class="name">GTFO</span>
-            <span class="cmd">!joker gtfo</span>
+            <span class="cmd">!graj gtfo</span>
             <span class="play-hint">Kliknij, by odtworzyć</span>
         </div>
-        
+
         <div class="card" onclick="play('joker')">
-            <img src="img/joker.png" alt="Obrazek dla Joker Sound">
+            <img src="img/joker.jpg" alt="joker">
             <span class="name">Joker</span>
-            <span class="cmd">!joker joker</span>
+            <span class="cmd">!graj joker</span>
             <span class="play-hint">Kliknij, by odtworzyć</span>
         </div>
 
         <div class="card" onclick="play('kurwa')">
-            <img src="img/kurwa.png" alt="Obrazek dla Kurwa Sound">
+            <img src="img/kurwa.jpg" alt="kurwa">
             <span class="name">Kurwa</span>
-            <span class="cmd">!joker kurwa</span>
+            <span class="cmd">!graj kurwa</span>
             <span class="play-hint">Kliknij, by odtworzyć</span>
         </div>
 
         <div class="card" onclick="play('morda')">
-            <img src="img/morda.png" alt="Obrazek dla Morda Sound">
+            <img src="img/morda.jpg" alt="morda">
             <span class="name">Morda</span>
-            <span class="cmd">!joker morda</span>
+            <span class="cmd">!graj morda</span>
             <span class="play-hint">Kliknij, by odtworzyć</span>
         </div>
 
         <div class="card" onclick="play('skrzypce')">
-            <img src="img/skrzypce.png" alt="Obrazek dla Skrzypce Sound">
+            <img src="img/skrzypce.jpg" alt="skrzypce">
             <span class="name">Skrzypce</span>
-            <span class="cmd">!joker skrzypce</span>
+            <span class="cmd">!graj skrzypce</span>
             <span class="play-hint">Kliknij, by odtworzyć</span>
         </div>
-        
+
     </div>
-
-    <script>
-        function play(file) {
-            let audio = new Audio(file + '.mp3');
-            audio.volume = 0.5; // Głośność podglądu (możesz zmienić)
-            audio.play().catch(e => console.log("Błąd odtwarzania podglądu: " + e));
-        }
-    </script>
-
-</body>
-</html>
