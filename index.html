@@ -7,14 +7,14 @@
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
-            background: #211633; /* TWOJE NOWE TŁO */
+            background: #211633; 
             color: #e0e0e0; 
             text-align: center; 
             padding: 20px; 
             margin: 0;
         }
 
-        /* Nagłówek: Zdjęcie + Tytuł */
+        /* --- NAGŁÓWEK --- */
         .header-container {
             display: flex;
             align-items: center;
@@ -34,79 +34,95 @@
         }
 
         h1 { color: #a970ff; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .subtitle { color: #b0a4c4; margin-bottom: 15px; font-size: 0.9em; }
+        .subtitle { color: #b0a4c4; margin-bottom: 20px; font-size: 0.9em; }
 
-        /* Kontener na GIF-a */
-        .gif-wrapper {
-            margin-bottom: 25px;
+        /* --- SEKCJA WIZUALNA (GIF + EMOTKA) --- */
+        .visuals-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Odstęp między gifem a emotką */
+            margin-bottom: 30px;
+            flex-wrap: wrap; /* Na małym telefonie ułoży jedno pod drugim */
         }
 
         .dance-gif {
             width: 120px;
             height: auto;
             border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Styl dla nowej emotki */
+        .mascot-img {
+            width: 120px;  /* Zmniejszamy 1000px do 120px */
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid #a970ff;
+            box-shadow: 0 0 15px rgba(169, 112, 255, 0.3);
+            transition: transform 0.3s ease; /* Płynna animacja */
+        }
+
+        .mascot-img:hover {
+            transform: scale(1.05) rotate(5deg); /* Lekki obrót po najechaniu */
         }
         
-        /* Siatka dźwięków */
+        /* --- SIATKA DŹWIĘKÓW --- */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
             gap: 15px; 
-            max-width: 800px; 
+            max-width: 900px; 
             margin: 0 auto; 
         }
         
         .card { 
-            background: #2d2042; /* Lekko jaśniejszy fiolet dla kafelków, żeby były widoczne */
+            background: #2d2042; 
             border: 1px solid #3d2d56; 
             border-radius: 10px; 
-            padding: 15px; 
+            padding: 12px; 
             transition: 0.2s; 
             display: flex; 
             flex-direction: column; 
-            align-items: center; 
+            align-items: center;
+            min-height: 100px;
         }
-        .card:hover { 
-            border-color: #a970ff; 
-            background: #36274e; 
-            transform: translateY(-3px);
-        }
+        .card:hover { border-color: #a970ff; background: #36274e; transform: translateY(-3px); }
         
         .card img { 
             width: 50px; 
             height: 50px; 
             border-radius: 6px; 
-            margin-bottom: 10px; 
+            margin-bottom: 8px; 
             background: #1a1a1a;
             cursor: pointer;
-            transition: transform 0.1s;
+            object-fit: cover;
         }
-        .card img:active { transform: scale(0.9); }
         
-        .name { display: block; font-weight: bold; font-size: 1em; margin-bottom: 5px; color: #fff; }
+        .name { display: block; font-weight: bold; font-size: 0.95em; margin-bottom: 6px; color: #fff; }
         
         .cmd { 
             font-family: monospace; 
             color: #a970ff; 
             background: #160d24; 
-            padding: 5px 8px; 
+            padding: 4px 6px; 
             border-radius: 4px; 
-            font-size: 0.85em; 
+            font-size: 0.75em; 
             cursor: copy; 
             border: 1px dashed #a970ff;
-            transition: 0.2s;
         }
         .cmd:hover { background: #a970ff; color: #160d24; }
 
-        /* Styl notyfikacji */
+        /* --- NOTYFIKACJA --- */
         #toast {
             visibility: hidden;
-            min-width: 200px;
+            min-width: 180px;
             background-color: #a970ff;
             color: #160d24;
             text-align: center;
             border-radius: 8px;
-            padding: 12px;
+            padding: 10px;
             position: fixed;
             z-index: 100;
             left: 50%;
@@ -115,11 +131,7 @@
             font-weight: bold;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2s;
-        }
-
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
@@ -131,10 +143,11 @@
         <h1>Soundboard Kiruyun</h1>
     </div>
 
-    <p class="subtitle">Kliknij obrazek, by słuchać. Kliknij fioletową ramkę, by skopiować komendę.</p>
+    <p class="subtitle">Kliknij obrazek, by słuchać. Kliknij ramkę, by skopiować komendę.</p>
 
-    <div class="gif-wrapper">
+    <div class="visuals-container">
         <img src="cpundance.gif" alt="Dance GIF" class="dance-gif">
+        <img src="kamilek_mozg.jpg" alt="Kamilek Mózg" class="mascot-img">
     </div>
 
     <div class="grid">
@@ -173,32 +186,12 @@
             <span class="name">Skrzypce</span>
             <span class="cmd" onclick="copyCmd('!graj skrzypce')">!graj skrzypce</span>
         </div>
-   <div class="card">
-    <img src="img/avemati.jpg" onclick="play('avemati')" alt="avemati">
-    <span class="name">Avemati</span>
-    <span class="cmd" onclick="copyCmd('!graj avemati')">!graj avemati</span>
-</div>
- <div class="card">
-            <img src="img/halo.jpg" onclick="play('halo')" alt="halo">
-            <span class="name">Halo</span>
-            <span class="cmd" onclick="copyCmd('!graj halo')">!graj halo</span>
-        </div>
-         <div class="card">
-            <img src="img/mlekosz.jpg" onclick="play('mlekosz')" alt="mlekosz">
-            <span class="name">Mlekosz</span>
-            <span class="cmd" onclick="copyCmd('!graj mlekosz')">!graj mlekosz</span>
-        </div>
-                 <div class="card">
-            <img src="img/asmr.jpg" onclick="play('asmr')" alt="asmr">
-            <span class="name">Asmr</span>
-            <span class="cmd" onclick="copyCmd('!graj asmr')">!graj asmr</span>
-        </div>
-         <div class="card">
-            <img src="img/cricket.jpg" onclick="play('cricket')" alt="cricket">
-            <span class="name">Cricket</span>
-            <span class="cmd" onclick="copyCmd('!graj cricket')">!graj cricket</span>
-        </div>
 
+        <div class="card">
+            <img src="img/avemati.jpg" onclick="play('avemati')" alt="avemati">
+            <span class="name">Ave Mati</span>
+            <span class="cmd" onclick="copyCmd('!graj avemati')">!graj avemati</span>
+        </div>
     </div>
 
     <div id="toast">Skopiowano komendę!</div>
@@ -207,7 +200,7 @@
         function play(file) {
             let audio = new Audio(file + '.mp3');
             audio.volume = 0.4;
-            audio.play();
+            audio.play().catch(e => console.log("Błąd odtwarzania pliku: " + file + ".mp3"));
         }
 
         function copyCmd(text) {
@@ -219,6 +212,5 @@
             });
         }
     </script>
-
 </body>
 </html>
